@@ -1,7 +1,7 @@
 @GetMapping("/mail")
   public String SMTPTest(@RequestParam String title,@RequestParam String content){
     final String user = "point455@naver.com";
-    final String password="rltjq2";
+    final String password="";
 
     Properties prop = new Properties();
     prop.put("mail.smtp.host","smtp.naver.com");
