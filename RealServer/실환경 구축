@@ -1,0 +1,12 @@
+commu-prod 실환경 구축
+
+EC2 : commu-admin(public) , commu-api(private), commu-db(private)
+
+1. commu-admin 에 접속해서 commu-api로 접속 . (ssh설정완료)
+2. commu-api 에서 commu-db 연결
+3. application 구동 테스트 (jar)
+4. 디렉토리 정리.
+5. CI/CD 설정 / jenkins 서버 public subnet에 따로 생성
+6. github에 운영용 브랜치 생성 (master)
+7. jenkins 에서 추적하는 브랜치 운영은 master 개발은 main으로 변경
+8. webhook 테스트
