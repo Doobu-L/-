@@ -1,3 +1,11 @@
+/**
+ 사전작업 
+ 네이버 ->메일 ->내 메일함 (오른쪽 톱니바퀴모양) ->POP3/SMTP 사용  사용함으로 체크.
+ 
+ 참고 :: https://ktko.tistory.com/entry/JAVA-SMTP%EC%99%80-Mail-%EB%B0%9C%EC%86%A1%ED%95%98%EA%B8%B0Google-Naver
+ 
+*/
+
 @GetMapping("/mail")
   public String SMTPTest(@RequestParam String title,@RequestParam String content){
     final String user = "point455@naver.com";
