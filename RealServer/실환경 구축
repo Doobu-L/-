@@ -1,9 +1,9 @@
-commu-prod 실환경 구축
+project-prod 실환경 구축
 
-EC2 : commu-admin(public) , commu-api(private), commu-db(private)
+EC2 : project-admin(public) , project-api(private), project-db(private)
 
-1. commu-admin 에 접속해서 commu-api로 접속 . (ssh설정완료)
-2. commu-api 에서 commu-db 연결
+1. project-admin 에 접속해서 project-api로 접속 . (ssh설정완료)
+2. project-api 에서 project-db 연결
 3. application 구동 테스트 (jar)
 4. 디렉토리 정리.
 5. CI/CD 설정 / jenkins 서버 public subnet에 따로 생성
