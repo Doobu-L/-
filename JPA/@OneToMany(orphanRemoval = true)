@@ -1,0 +1,17 @@
+orphanRemoval 옵션
+
+보통 1:N 관계 테이블 설정할때 추가.
+
+자식 엔티티의 변경이 있다면
+
+JPA 에서 자식엔티티의 수정은 insert update update delete 순으로 이어지는데
+
+변경된 자식을 먼저 insert 하고
+
+기존의 자식을 NULL로 update 한다.
+
+그리고 orphanRemoval 옵션을 true 로 하면 기존 NULL처리된 자식을 DELETE 한다. 
+
+PK(JoinColumn)값이 NULL로 변한 자식은 고아객체라고 하여 연결된 점이 없는 객체이다. 
+
+orphanRemoval옵션은 바로 이 고아객체를 삭제해주는 역활을 한다.
