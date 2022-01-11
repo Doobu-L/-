@@ -1,0 +1,140 @@
+[[ 입출금,예적금 계좌 & 거래내역 상세 조회 ]]
+account_type = 1001
+
+계좌 상세 조회 API - 입출금
+
+계좌 상세 조회에서 account_type 이 1001, 1002, 1003일 경우 입출금 상세에 필요한 값들을 response로 내려줍니다.
+
+ GET /accounts/{accountId}
+
+{
+	"result": "success",
+	"reason": "",
+	"data":{
+		"id": 379,
+		"accountNum": "1002111544167",
+		"prodName": "신한신세대통장",
+		"name": "신한 1002111544167",
+		"balanceAmt": 730047,		
+		"orgCode": "A1AAER0000",
+		"accountStatus": "01",
+		"hidden": "N",
+		"nickname": "신한 주거래",
+		"updateTimestamp": "2021.12.02 22:45",
+		"savingMethod": "01",
+		"expDate": "",
+		"offerdRate": "",
+		"assetType": {
+			"assetType": "depositAccount",
+			"typeCode": "1001",
+			"displayName": "입출금",
+			"displayType": "1"
+		}
+	}
+}
+ 
+
+{
+	"result": "success",
+	"reason": "",
+	"data":{
+		"id": 379,
+		"accountNum": "1202111544167",
+		"prodName": "U드림 저축예금",
+		"name": "신한 1202111544167",
+		"balanceAmt": 730047,		
+		"orgCode": "A1AAER0000",
+		"accountStatus": "01",
+		"savingMethod": "01",
+		"expDate": "2022.12.02",
+		"offerdRate": "1.2",
+		"hidden": "N",
+		"nickname": "신한 저축예금",
+		"updateTimestamp": "2021.12.02 22:45",
+		"assetType": {
+			"assetType": "depositAccount",
+			"typeCode": "1002",
+			"displayName": "예적금",
+			"displayType": "2"
+		}
+	}
+}
+계좌 숨기기 API
+
+입출금, 예적금, 투자 계좌 등의 계좌를 숨기는 API입니다 (공통적으로 이용됩니다.)
+
+계좌 상세 조회는 모두 (/accounts/{accountId}/transactions) api를 사용합니다.
+
+account_type 이 1001, 1002, 1003일 경우 입출금 상세에 필요한 값들을 response로 내려줍니다.
+
+ 
+
+GET /accounts/{accountId}/transactions
+
+request header
+
+m-Id : mydata.mydata_user.id
+
+request Message
+
+path
+
+accountId : mydata.account.id
+
+query
+
+page
+
+size
+
+response body a(입출금), b(예적금)
+
+{
+	"result": "success",
+	"reason": "",
+	"data": [{
+        "id": 4349258,
+        "transDtime": "2020-12-02 20:47:11",
+        "transDate": "2021.12.02 목",
+        "transTime": "20:47:11",
+        "transAmt": 10000,
+        "balanceAmt": 730047,
+        "transMemo": "카카오페이"
+      },
+      {
+        "id": 4349259,
+        "transDtime": "2020-12-02 14:56:19",
+        "transDate": "2021.12.02 목",
+        "transTime": "14:56:19",
+        "transAmt": 34960,
+        "balanceAmt": 740047,
+        "transMemo": "쿠팡"
+      }
+	]
+}
+{
+	"result": "success",
+	"reason": "",
+	"data": [{
+        "id": 4349258,
+        "transDtime": "2021-12-02 20:47:11",
+        "transDate": "2021.12.02 목",
+        "transTime": "20:47:11",
+        "transAmt": 10000,
+        "balanceAmt": 730047,
+        "transMemo": "카카오페이"
+      },
+      {
+        "id": 4349259,
+        "transDtime": "2021-12-02 14:56:19",
+        "transDate": "2021.12.02 목",
+        "transTime": "14:56:19",
+        "transAmt": 34960,
+        "balanceAmt": 740047,
+        "transMemo": "쿠팡"
+      }
+	]
+}
+expDate(만기일) 이 null또는 비어있을 경우 빈문자열로 설정
+
+적용금리가 없을 경우 빈문자열로 설정
