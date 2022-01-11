@@ -1,0 +1,83 @@
+account_type = 3xxx (3100 등…)
+
+계좌 & 거래내역 상세 조회 API - 대출
+
+계좌 & 거래내역 상세 조회에서 account_type 이 3 으로 시작되는 경우 대출 거래내역 상세에 필요한 값들을 response로 내려줍니다.
+
+GET /accounts/{accountId}/transactions
+
+계좌 상세 조회는 모두 (/accounts/{accountId}) api를 사용합니다.
+
+account_type 이 3xxx일 경우 입출금 상세에 필요한 값들을 response로 내려줍니다.
+
+ 
+
+GET /accounts/{accountId}/transactions
+
+request header
+
+m-Id : mydata.mydata_user.id
+
+request Message
+
+path
+
+accountId : mydata.account.id
+
+query
+
+page
+
+size
+
+response body
+
+{
+	"result": "success",
+	"reason": "",
+	"account": {
+		"id": 379,
+		"accountNum": "5502111544167",
+		"prodName": "일반자금대출(유동성한도)",
+		"simpleInfo": "신한 5502111544167",
+		"balanceAmt": 20000000,
+		"orgCode": "A1AAER0000",
+		"accountStatus": "01",
+		"expDate": "2022.12.24",
+		"lastOfferedDate": "3.7%",
+		"repayDate": 15,
+		"hidden": "N",
+		"nickname": "신한 저축예금",
+		"loanPrincipal": "30000000",
+		"updateTimestamp": "2021.12.25 22:45",
+		"assetType": {
+			"assetType": "loan",
+			"typeCode": "3100",
+			"displayName": "대출",
+			"diaplayType": 7
+		}
+	},
+	"transactions": [
+		{
+			"id": 4349258,
+			"transDtime": "2021-06-30 20:47:11",
+			"transDate": "2021.06.30 수",
+			"transTime": "20:47",
+			"transNo": 3812383653,
+			"transType": "02",
+			"principalAmt": 5000000,
+			"balanceAmt": 15000000,
+			"transMemo": "이자 입금"
+		},
+		{
+			"id": 4349259,
+			"transDtime": "2021-11-15 14:56:19",
+			"transNo": 3812383654,
+			"transType": "02",
+			"principalAmt": 5000000,
+			"balanceAmt": 10000000,
+			"transMemo": "이자 입금"
+		}
+	]
+}
+
