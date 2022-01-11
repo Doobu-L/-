@@ -1,0 +1,30 @@
+[[ 소비내역 추가 ]] 
+
+소비내역 (현금) 을 추가합니다.
+
+무조건 현금이기 때문에 “현금” 문자열은 별도로 받을 필요가 없습니다.
+
+ 
+
+POST /consumptionHistories
+
+request header
+
+m-Id : mydata.mydata_user.id
+
+request Message
+
+body
+
+ 
+
+{
+	"btId": 18,
+	"merchantName": "집 앞 슈퍼",
+	"consumptionAmt": 3000,
+	"consumptionDtime": "20210624134",
+	"memo": "슈퍼에서 현금으로 계산함"
+}
+
+
+[[  ]]
