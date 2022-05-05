@@ -1,13 +1,39 @@
 Filter는 DispatcherServlet 앞단에서 처리된다. Spring에 Bean으로 등록은 되지만, 탐켓같은 Web Context 영역에서 관리된다. Dispatcher Servlet 부터 Spring Context에서 관리.
 
 javax.servlet 의 Filter를 사용해서 구현.
+-- init 메소드
+init 메소드는 필터 객체를 초기화하고 서비스에 추가하기 위한 메소드이다. 웹 컨테이너가 1회 init 메소드를 호출하여 필터 객체를 초기화하면 이후의 요청들은 doFilter를 통해 처리된다.
+
+-- doFilter 메소드
+doFilter 메소드는 url-pattern에 맞는 모든 HTTP 요청이 디스패처 서블릿으로 전달되기 전에 웹 컨테이너에 의해 실행되는 메소드이다. doFilter의 파라미터로는 FilterChain이 있는데, FilterChain의 doFilter 통해 다음 대상으로 요청을 전달하게 된다. 
+chain.doFilter() 전/후에 우리가 필요한 처리 과정을 넣어줌으로써 원하는 처리를 진행할 수 있다.
+
+-- destroy 메소드
+destroy 메소드는 필터 객체를 서비스에서 제거하고 사용하는 자원을 반환하기 위한 메소드이다. 이는 웹 컨테이너에 의해 1번 호출되며 이후에는 이제 doFilter에 의해 처리되지 않는다.
+
 
 Interceptor 는 DispatcherServlet 이 Controller로 요청과 응답을 주고받는 구간에서 처리.
 
 Spring Context에서 동작한다. 
 
+-- preHandle 메소드
+preHandle 메소드는 컨트롤러가 호출되기 전에 실행된다. 그렇기 때문에 컨트롤러 이전에 처리해야 하는 전처리 작업이나 요청 정보를 가공하거나 추가하는 경우에 사용할 수 있다.
+preHandle의 3번째 파라미터인 handler 파라미터는 핸들러 매핑이 찾아준 컨트롤러 빈에 매핑되는 HandlerMethod라는 새로운 타입의 객체로써, @RequestMapping이 붙은 메소드의 정보를 추상화한 객체이다.
+또한 preHandle의 반환 타입은 boolean인데 반환값이 true이면 다음 단계로 진행이 되지만, false라면 작업을 중단하여 이후의 작업(다음 인터셉터 또는 컨트롤러)은 진행되지 않는다.
+
+-- postHandle 메소드
+postHandle 메소드는 컨트롤러를 호출된 후에 실행된다. 그렇기 때문에 컨트롤러 이후에 처리해야 하는 후처리 작업이 있을 때 사용할 수 있다. 
+이 메소드에는 컨트롤러가 반환하는 ModelAndView 타입의 정보가 제공되는데, 최근에는 Json 형태로 데이터를 제공하는 RestAPI 기반의 컨트롤러(@RestController)를 만들면서 자주 사용되지는 않는다.
+
+-- afterCompletion 메소드
+afterCompletion 메소드는 이름 그대로 모든 뷰에서 최종 결과를 생성하는 일을 포함해 모든 작업이 완료된 후에 실행된다. 요청 처리 중에 사용한 리소스를 반환할 때 사용하기에 적합하다.
+
+ 
 Filter / Interceptor 차이점
 
 Filter는 공통적인 인증/인가 작업에대한 처리에 적합하고, 모든요청에대한 로깅,Spring과 분리되어야 하는 기술들에 적합하다. 그리고 Request/Response 를 조작할 수 있다 .(doFilter를 통해)
 
 Interceptor는 세부적인 인증/인가 작업을 할 수 있다. Filter 는 모든요청에대한 작업처리를 한다면, Interceptor는 요청을 구분해서 작업 할 수 있다.
+
+![https://blog.kakaocdn.net/dn/cjsq60/btrzjoZ0qcq/EDsLOVpZNcmFu6prkzALFk/img.png](https://blog.kakaocdn.net/dn/cjsq60/btrzjoZ0qcq/EDsLOVpZNcmFu6prkzALFk/img.png)
+
