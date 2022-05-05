@@ -1,0 +1,13 @@
+Filter는 DispatcherServlet 앞단에서 처리된다. Spring에 Bean으로 등록은 되지만, 탐켓같은 Web Context 영역에서 관리된다. Dispatcher Servlet 부터 Spring Context에서 관리.
+
+javax.servlet 의 Filter를 사용해서 구현.
+
+Interceptor 는 DispatcherServlet 이 Controller로 요청과 응답을 주고받는 구간에서 처리.
+
+Spring Context에서 동작한다. 
+
+Filter / Interceptor 차이점
+
+Filter는 공통적인 인증/인가 작업에대한 처리에 적합하고, 모든요청에대한 로깅,Spring과 분리되어야 하는 기술들에 적합하다. 그리고 Request/Response 를 조작할 수 있다 .(doFilter를 통해)
+
+Interceptor는 세부적인 인증/인가 작업을 할 수 있다. Filter 는 모든요청에대한 작업처리를 한다면, Interceptor는 요청을 구분해서 작업 할 수 있다.
