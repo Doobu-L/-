@@ -1,0 +1,27 @@
+#1. 로그인 과정
+목적지  :  https://accounts.google.com/o/oauth2/v2/auth
+QueryString : client_id , client-secret,redirect_uri
+              scope,response_type
+REQUEST URL
+https://accounts.google.com/o/oauth2/v2/auth?client_id=#CLIENT_ID#&client-secret=#CLIENT_SECRET&redirect_uri=https://localhost:28080/login/oauth/google&scope=https://www.googleapis.com/auth/drive.metadata.readonly&response_type=code
+
+https://console.cloud.google.com 에서 
+1. 앱등록
+2. 사용자 인증정보 등록 . 
+3. OAuth2.0 클리이언트 ID 를 생성해서 클라이언트 ID , 클라이언트 secret 을 발급받는다.
+scope 범위지정도 꼭하자. 그리고 중요한건 redirect uri 추가. (인증 후 리다이렉트되는 url - 이 url과 로그인화면 요청 시 보내는 redirect_uri 가 같아야함.)
+4. applicataion.yml에 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 비밀>.<
+            client-secret: 비밀 >.<
+            redirect_uri: http://localhost:28080/login/oauth/google   -요놈이 사용자인증 ID만들 때 등록한 redirect_uri 와 같아야함.
+            #scope: # 필요한 권한 #
+5. SecurityConfig oauth2Login 추가
+6. 왜 인진 모르겠지만 /oauth2/authorization/google 일로 href 시키면 application.yml 에 있는 google client정보 등록한거 가져다가 https://accounts.google.com/o/oauth2/v2/auth에다가 요청함
+해당 목적지로 리다이렉트나 포워딩해주는 부분을 찾으려 했지만 못찾음.
+왜 때문인지 아는사람....ㅠㅠ 구글링 좀 더 해봐야겠음..
+
