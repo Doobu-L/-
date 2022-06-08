@@ -1,4 +1,5 @@
 ##테스트를 위해 임시로 만든 서비스
+# https://codechacha.com/ko/java-completable-future/ 
 #Service 
 #목적 - CompletableFuture를 이용한 비동기 처리.
         mydataApiCardService.updateAssetUserSearch 를 비동기로 호출 후 응답을 기다리고 다음 작업 수행.(블락)
